@@ -1,0 +1,51 @@
+/build/
+/dist/
+/Menu/
+
+# Generated from the versioned PNG sources by Convert-Icon.ps1.
+/app.ico
+/tray.ico
+
+# Local workspace instructions and asset-generation notes.
+/AGENTS.md
+/.agents/
+/.codex/
+/TrayIcon-yellow.prompt.txt
+
+# Toolchains, dependencies, build output and caches.
+/msys64/
+/toolchain/
+/vendor/
+/node_modules/
+/.venv/
+/venv/
+/.cache/
+/.vs/
+__pycache__/
+*.pyc
+*.o
+*.obj
+*.exe
+*.dll
+*.a
+*.lib
+*.pdb
+*.zip
+*.7z
+*.log
+*.tmp
+
+# Local credentials and secrets; examples may be versioned.
+.env
+.env.*
+!.env.example
+!.env.sample
+secrets/
+*.secret
+*.secrets.*
+credentials.json
+credentials.*.json
+*.pem
+*.key
+*.p12
+*.pfx

@@ -1,0 +1,25 @@
+#include <windows.h>
+1 ICON "app.ico"
+2 ICON "tray.ico"
+1 RT_MANIFEST "app.manifest"
+1 VERSIONINFO
+FILEVERSION 1,0,0,0
+PRODUCTVERSION 1,0,0,0
+FILETYPE VFT_APP
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040704b0"
+    BEGIN
+      VALUE "FileDescription", "PortableTrayLauncher"
+      VALUE "ProductName", "PortableTrayLauncher"
+      VALUE "FileVersion", "1.0.0"
+      VALUE "OriginalFilename", "PortableTrayLauncher.exe"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x407, 1200
+  END
+END
+
