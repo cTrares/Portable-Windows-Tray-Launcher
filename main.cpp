@@ -140,6 +140,7 @@ void SetLabel(Entry& entry) {
 }
 
 bool EntryLess(const Entry& a, const Entry& b) {
+    if (a.directory != b.directory) return a.directory;
     if (a.order.empty() != b.order.empty()) return !a.order.empty();
     if (a.order != b.order) {
         if (a.order.size() != b.order.size()) return a.order.size() < b.order.size();
@@ -318,16 +319,7 @@ void Draw(DRAWITEMSTRUCT* draw) {
     text.right -= Scale(25);
     DrawTextW(dc, item->label.c_str(), -1, &text,
         DT_SINGLELINE | DT_VCENTER | DT_NOPREFIX | DT_END_ELLIPSIS);
-    if (item->submenu) {
-        HPEN pen = CreatePen(PS_SOLID, std::max(1, Scale(1)), RGB(190, 190, 190));
-        HGDIOBJ old = SelectObject(dc, pen);
-        int x = row.right - Scale(13);
-        MoveToEx(dc, x - Scale(2), centerY - Scale(3), nullptr);
-        LineTo(dc, x + Scale(1), centerY);
-        LineTo(dc, x - Scale(2), centerY + Scale(3));
-        SelectObject(dc, old);
-        DeleteObject(pen);
-    }
+    // Windows draws the submenu arrow, including for owner-drawn menu items.
     RestoreDC(dc, saved);
 }
 

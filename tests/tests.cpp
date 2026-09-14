@@ -75,6 +75,7 @@ int wmain(int count, wchar_t** args) {
     menuBrush = CreateSolidBrush(Background);
     try {
         if (count > 3 && wcscmp(args[3], L"--popup") == 0) {
+            EnableDarkMenuFrame();
             WNDCLASSW klass{};
             klass.hInstance = GetModuleHandleW(nullptr);
             klass.lpfnWndProc = TestWindow;
@@ -96,6 +97,10 @@ int wmain(int count, wchar_t** args) {
                 {L"003_Handbuch.pdf", L"Handbuch", false},
                 {L"4ChatGPT.url", L"ChatGPT", false},
                 {L"05 Ordner.v2", L"Ordner.v2", true},
+                {L"0 Favoriten", L"Favoriten", true},
+                {L"1_Programme", L"Programme", true},
+                {L"02-Dokumente", L"Dokumente", true},
+                {L"3 Tools", L"Tools", true},
                 {L"2026.txt", L"2026", false},
                 {L"01_Änderung & Prüfung.txt", L"Änderung & Prüfung", false},
                 {L"alpha.beta.txt", L"alpha.beta", false},
@@ -117,6 +122,27 @@ int wmain(int count, wchar_t** args) {
             std::sort(numbers.begin(), numbers.end(), EntryLess);
             Check(numbers[0].order == L"1" && numbers[1].order == L"2" && numbers[2].order == L"10",
                 "numeric prefixes sort without overflow");
+            {
+                std::vector<Entry> mixed;
+                for (const auto& sample : {
+                    NameCase{L"01 App.lnk", L"App", false},
+                    NameCase{L"Folder", L"Folder", true},
+                    NameCase{L"Alpha.txt", L"Alpha", false},
+                    NameCase{L"10 Tools", L"Tools", true},
+                    NameCase{L"2 Documents", L"Documents", true},
+                    NameCase{L"Beta.txt", L"Beta", false}}) {
+                    Entry entry;
+                    entry.filename = sample.input;
+                    entry.directory = sample.directory;
+                    SetLabel(entry);
+                    mixed.push_back(entry);
+                }
+                std::sort(mixed.begin(), mixed.end(), EntryLess);
+                Check(mixed[0].label == L"Documents" && mixed[1].label == L"Tools" &&
+                    mixed[2].label == L"Folder" && mixed[3].label == L"App" &&
+                    mixed[4].label == L"Alpha" && mixed[5].label == L"Beta",
+                    "folders precede numbered files; each group retains numeric and alphabetical order");
+            }
             {
                 Popup popup;
                 popup.Populate(popup.root, menuPath, true);

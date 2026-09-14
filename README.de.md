@@ -14,6 +14,14 @@ Die gesamte ZIP in einen beschreibbaren Ordner entpacken und darin `PortableTray
 
 ## Benutzung
 
+### Screenshots
+
+| Startmenü | Untermenü „Documents“ |
+| --- | --- |
+| ![Startmenü mit Ordnern oben und einem einzelnen Untermenüpfeil](docs/images/launcher-menu.jpg) | ![Untermenü mit Quick Start und Project Notes](docs/images/documents-submenu.jpg) |
+
+Echte Menüaufnahmen mit Beispieleinträgen. Die Ordner heißen auf der Festplatte `01 Applications`, `02 Documents` und `03 Tools`; angezeigt werden nur die Namen. Nummerierte Dateien stehen unterhalb der Ordner.
+
 `dist\PortableTrayLauncher\PortableTrayLauncher.exe` starten. Das Programm läuft ausschließlich im Infobereich der Taskleiste. Windows kann neue Tray-Icons zunächst unter dem Aufklapppfeil verbergen; das Icon lässt sich von dort in den sichtbaren Infobereich ziehen.
 
 - Linksklick: Menü unmittelbar oberhalb des Tray-Icons öffnen.
@@ -27,7 +35,7 @@ Der gesamte Release-Ordner kann kopiert oder verschoben werden. Verknüpfungen u
 
 Die erste Ordnerstufe wird als Untermenü angezeigt. Darin enthaltene weitere Ordner öffnen sich im Explorer. Dateien dürfen auch direkt in `Menu` liegen. Versteckte/System-Dateien wie `desktop.ini` werden ausgelassen.
 
-Dateiendungen werden ausgeblendet. Führende Ziffern mit optionalen Leerzeichen, Bindestrichen oder Unterstrichen dienen als Sortiernummer, z. B. `01 Programme`, `02-Excel.lnk`, `03_Handbuch.pdf`. Nummerierte Einträge erscheinen zuerst, numerisch sortiert; anschließend folgen unnummerierte Einträge alphabetisch. Reine Zahlennamen bleiben lesbar.
+Ordner stehen immer oberhalb von Dateien und Verknüpfungen. Innerhalb jeder Gruppe dienen führende Ziffern mit optionalen Leerzeichen, Bindestrichen oder Unterstrichen als Sortiernummer, z. B. `01 Programme`, `02-Excel.lnk`, `03_Handbuch.pdf`. Nummerierte Einträge erscheinen zuerst, numerisch sortiert; anschließend folgen unnummerierte Einträge alphabetisch. Dateiendungen werden ausgeblendet; reine Zahlennamen bleiben lesbar.
 
 Alle Einträge starten über die registrierte Standardaktion der Windows-Shell. Deshalb wird beispielsweise eine PS1-Datei nur ausgeführt, wenn Windows dies auch beim Doppelklick tun würde. Verknüpfungen behalten Argumente und Arbeitsverzeichnis. Fehlgeschlagene Starts zeigen eine kleine native Fehlermeldung.
 

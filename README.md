@@ -14,6 +14,14 @@ Extract the entire ZIP to a writable folder and run `PortableTrayLauncher.exe` i
 
 ## Usage
 
+### Screenshots
+
+| Launcher menu | Documents submenu |
+| --- | --- |
+| ![Launcher menu with folders first and a single submenu arrow](docs/images/launcher-menu.jpg) | ![Documents submenu with Quick Start and Project Notes](docs/images/documents-submenu.jpg) |
+
+Actual menu captures using example entries. The folders on disk are named `01 Applications`, `02 Documents` and `03 Tools`; only their names are displayed. Numbered files appear below the folders.
+
 The application runs entirely in the taskbar notification area. Windows may initially hide its icon in the tray overflow; drag it into the visible notification area if you prefer.
 
 - **Left-click** to open the launcher menu immediately above the tray icon.
@@ -29,7 +37,7 @@ You can copy or move the entire application folder. Shortcuts and their targets 
 
 The first level of folders appears as submenus. Further folders inside those submenus open in File Explorer. Files can also be placed directly in `Menu`. Hidden and system files such as `desktop.ini` are skipped.
 
-File extensions are hidden. Leading digits, optionally followed by spaces, hyphens or underscores, control the order: for example, `01 Apps`, `02-Excel.lnk` or `03_Manual.pdf`. Numbered entries come first in numeric order, followed by unnumbered entries alphabetically. Names consisting entirely of numbers remain readable.
+Folders always appear above files and shortcuts. Within each group, leading digits, optionally followed by spaces, hyphens or underscores, control the order: for example, `01 Apps`, `02-Excel.lnk` or `03_Manual.pdf`. Numbered entries come first in numeric order, followed by unnumbered entries alphabetically. File extensions are hidden; names consisting entirely of numbers remain readable.
 
 Entries open using the registered Windows Shell default action. For example, a PS1 file only executes if Windows would also execute it on a double-click. Shortcuts retain their arguments and working directory. Failed launches display a small native error dialog.
 
