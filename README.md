@@ -1,67 +1,79 @@
 # Portable Windows Tray Launcher
 
-Ein portabler Programmstarter für Windows 11: Programme, Verknüpfungen, Dateien und Ordner direkt aus dem Infobereich der Taskleiste öffnen. Einfach den Menüordner befüllen – daraus entsteht automatisch ein übersichtliches Startmenü mit Untermenüs, Dateisymbolen und eigener Sortierung. Optional mit Autostart, ohne Installation und ohne zusätzliche Runtime.
+**English** | [Deutsch](README.de.md)
 
-**Portable Windows system tray launcher** for apps, shortcuts, files and folders. A folder-based quick launch menu with submenus, dark styling and optional startup with Windows. Native C++/Win32, 64-bit; no installer or extra runtime required.
+A portable application launcher for Windows 11 that puts your apps, shortcuts, files and folders in the system tray. Fill a menu folder to create your own quick launch menu with submenus, file icons and custom ordering. Optional startup with Windows, no installation and no extra runtime required.
 
-## Benutzung
+Built with native C++/Win32 for 64-bit Windows. Organize portable apps, keep everyday tools one click away and open documents or folders from the taskbar notification area.
 
-`dist\PortableTrayLauncher\PortableTrayLauncher.exe` starten. Das Programm läuft ausschließlich im Infobereich der Taskleiste. Windows kann neue Tray-Icons zunächst unter dem Aufklapppfeil verbergen; das Icon lässt sich von dort in den sichtbaren Infobereich ziehen.
+## Download
 
-- Linksklick: Menü unmittelbar oberhalb des Tray-Icons öffnen.
-- Rechtsklick: Menüordner öffnen, Autostart aktivieren/deaktivieren, Beenden.
-- Konfiguration: Dateien, Verknüpfungen und Ordner in `Menu` neben der EXE ablegen. Beim nächsten Linksklick wird alles frisch eingelesen.
-- Kein Hauptfenster, kein Einstellungsfenster, kein Menüeditor, keine permanente Ordnerüberwachung.
+**[Download the portable ZIP for Windows 64-bit](https://github.com/cTrares/Portable-Windows-Tray-Launcher/releases/latest/download/Portable-Windows-Tray-Launcher-win64.zip)**
 
-Der gesamte Release-Ordner kann kopiert oder verschoben werden. Verknüpfungen und deren Ziele müssen am neuen Ort weiterhin gültig sein. Bei aktiviertem Autostart nach einem Umzug am neuen Ort erneut „Autostart aktivieren“ wählen: Windows benötigt dort einen absoluten EXE-Pfad. Autostart wird pro Benutzer unter `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` gespeichert; Administratorrechte sind nicht nötig. Es wird nicht automatisch Autostart aktiviert.
+Extract the entire ZIP to a writable folder and run `PortableTrayLauncher.exe` inside the extracted application folder. No build or installation is needed. [Release notes and downloads](https://github.com/cTrares/Portable-Windows-Tray-Launcher/releases/latest).
 
-## Menüstruktur
+## Usage
 
-Die erste Ordnerstufe wird als Untermenü angezeigt. Darin enthaltene weitere Ordner öffnen sich im Explorer. Dateien dürfen auch direkt in `Menu` liegen. Versteckte/System-Dateien wie `desktop.ini` werden ausgelassen.
+The application runs entirely in the taskbar notification area. Windows may initially hide its icon in the tray overflow; drag it into the visible notification area if you prefer.
 
-Dateiendungen werden ausgeblendet. Führende Ziffern mit optionalen Leerzeichen, Bindestrichen oder Unterstrichen dienen als Sortiernummer, z. B. `01 Programme`, `02-Excel.lnk`, `03_Handbuch.pdf`. Nummerierte Einträge erscheinen zuerst, numerisch sortiert; anschließend folgen unnummerierte Einträge alphabetisch. Reine Zahlennamen bleiben lesbar.
+- **Left-click** to open the launcher menu immediately above the tray icon.
+- **Right-click** to open the menu folder, enable or disable startup with Windows, or quit.
+- **Configure your menu** by placing files, shortcuts and folders in `Menu` next to the EXE. Contents are read again each time you open the launcher menu.
+- No main window, settings window, menu editor or continuous folder monitoring.
 
-Alle Einträge starten über die registrierte Standardaktion der Windows-Shell. Deshalb wird beispielsweise eine PS1-Datei nur ausgeführt, wenn Windows dies auch beim Doppelklick tun würde. Verknüpfungen behalten Argumente und Arbeitsverzeichnis. Fehlgeschlagene Starts zeigen eine kleine native Fehlermeldung.
+The current application interface uses German labels: **Menüordner öffnen** means “Open menu folder,” **Autostart aktivieren/deaktivieren** means “Enable/disable startup with Windows,” and **Beenden** means “Quit.”
 
-Ein leerer Ordner bietet „Menü ist leer“ und „Menüordner öffnen“. Tastatur: Pfeiltasten, Enter, Escape und Anfangsbuchstaben. Große Menüs verwenden die native Windows-Menünavigation.
+You can copy or move the entire application folder. Shortcuts and their targets must remain valid at the new location. If startup with Windows was enabled, select **Autostart aktivieren** again after moving the application: Windows needs its absolute EXE path. Startup is stored per user under `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`; administrator privileges are not required. Startup is never enabled automatically.
 
-## Gestaltung
+## Menu structure
 
-Neutrales Windows-Dark-Grau: Hintergrund `#202020`, Hervorhebung `#2D2D2D`, Text `#F3F3F3`. Kompakte 30-DIP-Zeilen, Segoe UI, Shell-Dateiicons, DPI-Skalierung. Das bereitgestellte `AppIcon.png` ist als mehrstufiges ICO in der EXE eingebettet. Das Original bleibt unverändert.
+The first level of folders appears as submenus. Further folders inside those submenus open in File Explorer. Files can also be placed directly in `Menu`. Hidden and system files such as `desktop.ini` are skipped.
 
-Das Menü ist ein echtes Win32-Popup und wird an der tatsächlichen Position des Tray-Icons verankert. Die Einblendanimation richtet sich nach den Windows-Einstellungen; das Programm fordert die Öffnungsrichtung von unten nach oben an.
+File extensions are hidden. Leading digits, optionally followed by spaces, hyphens or underscores, control the order: for example, `01 Apps`, `02-Excel.lnk` or `03_Manual.pdf`. Numbered entries come first in numeric order, followed by unnumbered entries alphabetically. Names consisting entirely of numbers remain readable.
 
-## Wiederherstellung und Build
+Entries open using the registered Windows Shell default action. For example, a PS1 file only executes if Windows would also execute it on a double-click. Shortcuts retain their arguments and working directory. Failed launches display a small native error dialog.
 
-Das Repository enthält den vollständigen Quellstand einschließlich Build-Skripten, Windows-Ressourcen und PNG-Iconquellen. Compiler, installierte Bibliotheken und fertige EXE-Dateien werden nicht mitgesichert. Die Versionen der lokalen Build-Werkzeuge stehen in [DEPENDENCIES.md](DEPENDENCIES.md).
+An empty folder offers **Menü ist leer** (“Menu is empty”) and **Menüordner öffnen** (“Open menu folder”). Use the arrow keys, Enter, Escape and first-letter navigation with the keyboard. Large menus use native Windows menu navigation.
 
-Auf einem neuen Windows-Rechner Git, PowerShell 7 und MSYS2 mit der MinGW-w64-Toolchain für **MINGW64/x86_64** bereitstellen. In einer MSYS2-MINGW64-Shell die Build-Abhängigkeiten installieren:
+## Appearance
+
+Dark Windows-style colors: background `#202020`, highlight `#2D2D2D`, text `#F3F3F3`. Compact 30-DIP rows, Segoe UI, Shell file icons and DPI scaling. The supplied `AppIcon.png` is embedded in the EXE as a multi-resolution ICO; the original image is preserved.
+
+The menu is a native Win32 popup anchored to the tray icon's actual position. Animation follows Windows settings, with the application requesting an upward opening direction.
+
+## Restore and build from source
+
+This repository contains the complete source, build scripts, Windows resources and PNG icon sources. Compilers, installed libraries and compiled executables are excluded from Git; ready-to-run ZIPs are provided as release downloads. Recorded local tool versions are listed in [DEPENDENCIES.md](DEPENDENCIES.md).
+
+On a new Windows machine, install Git, PowerShell 7 and MSYS2 with the MinGW-w64 toolchain for **MINGW64/x86_64**. Install the build dependencies in an MSYS2 MINGW64 shell:
 
 ```sh
 pacman -S --needed mingw-w64-x86_64-gcc mingw-w64-x86_64-binutils
 ```
 
-Danach das Repository klonen, in dessen Ordner wechseln und in PowerShell 7 ausführen:
+Then clone the repository and build from PowerShell 7:
 
 ```powershell
 git clone https://github.com/cTrares/Portable-Windows-Tray-Launcher.git
 cd Portable-Windows-Tray-Launcher
 .\build.ps1
-# Anderer Compilerpfad:
+# To specify the compiler directory explicitly:
 .\build.ps1 -Toolchain 'C:\msys64\mingw64\bin'
 ```
 
-Das Build-Skript erzeugt `app.ico` und `tray.ico` aus den versionierten PNG-Dateien sowie alle Build- und Ausgabeordner. Die C++-Runtime wird statisch eingebunden. Ausgabe: `dist\PortableTrayLauncher`. Der technische EXE-Name lautet `PortableTrayLauncher.exe`. Für den Betrieb werden nur EXE und `Menu` benötigt.
+The build script generates `app.ico` and `tray.ico` from the versioned PNG files and creates all build and output directories. The C++ runtime is linked statically. Output: `dist\PortableTrayLauncher`. The executable is named `PortableTrayLauncher.exe`. Only the EXE and `Menu` folder are needed to run the application.
 
-Der persönliche `Menu`-Inhalt gehört nicht zum Quellstand. Er wird beim Build leer angelegt und kann anschließend mit eigenen Verknüpfungen und Dateien befüllt werden. Für die Wiederherstellung einer persönlichen Einrichtung muss dieser Inhalt separat gesichert werden; installierte oder portable Zielprogramme werden separat bereitgestellt.
+Your personal `Menu` contents are not part of the source repository. The build creates an empty menu folder that you can fill with your own shortcuts and files. Back up those contents separately to restore a personal setup, and obtain installed or portable target applications separately.
 
 ## Tests
+
+After building the application, the included development tests can be run from PowerShell:
 
 ```powershell
 .\tests\run.ps1
 .\tests\run.ps1 -Shell
 ```
 
-Die Shell-Tests öffnen ausdrücklich harmlose Testdateien, einen Browser und Explorer. Ein vorbestehender eigener Autostart-Eintrag wird gesichert und nach dem Test wiederhergestellt. Die Registry-Tests benötigen einen normalen Benutzerprozess außerhalb einer schreibgeschützten Testsandbox, keine Administratorrechte.
+The Shell tests deliberately open harmless test files, a browser and File Explorer. Any existing startup entry for this application is backed up and restored after the test. Registry tests need a normal user process outside a read-only test sandbox; they do not require administrator privileges.
 
-Die Testquellen sind im Repository enthalten; Testprogramme und Testdaten werden bei Bedarf erzeugt. `tests` und `build` werden für den normalen Betrieb nicht benötigt.
+Test sources are included in the repository; test executables and fixtures are generated when needed. The `tests` and `build` directories are not needed for normal use.
