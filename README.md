@@ -26,7 +26,7 @@ The application runs entirely in the taskbar notification area. Windows may init
 
 - **Left-click** to open the launcher menu immediately above the tray icon.
 - **Right-click** to open the menu folder, enable or disable startup with Windows, or quit.
-- **Configure your menu** by placing files, shortcuts and folders in `Menu` next to the EXE. Contents are read again each time you open the launcher menu.
+- **Configure your menu** by placing files, shortcuts and folders in `Menu` next to the EXE. Contents are read again each time you open the launcher menu. There is no separate menu editor: put an item in the folder and it appears automatically.
 - No main window, settings window, menu editor or continuous folder monitoring.
 
 The current application interface uses German labels: **Menüordner öffnen** means “Open menu folder,” **Autostart aktivieren/deaktivieren** means “Enable/disable startup with Windows,” and **Beenden** means “Quit.”
@@ -39,7 +39,7 @@ The first level of folders appears as submenus. Further folders inside those sub
 
 Folders always appear above files and shortcuts. Within each group, leading digits, optionally followed by spaces, hyphens or underscores, control the order: for example, `01 Apps`, `02-Excel.lnk` or `03_Manual.pdf`. Numbered entries come first in numeric order, followed by unnumbered entries alphabetically. File extensions are hidden; names consisting entirely of numbers remain readable.
 
-Entries open using the registered Windows Shell default action. For example, a PS1 file only executes if Windows would also execute it on a double-click. Shortcuts retain their arguments and working directory. Failed launches display a small native error dialog.
+The launcher can open anything Windows knows how to open with its normal double-click action: applications, shortcuts, documents, folders, URLs, scripts and other registered file types. It delegates every item to the Windows Shell, so the setup stays simple and behaves like Explorer. For example, a PS1 file only executes if Windows would also execute it on a double-click. Shortcuts retain their arguments and working directory. Failed launches display a small native error dialog.
 
 An empty folder offers **Menü ist leer** (“Menu is empty”) and **Menüordner öffnen** (“Open menu folder”). Use the arrow keys, Enter, Escape and first-letter navigation with the keyboard. Large menus use native Windows menu navigation.
 
@@ -69,7 +69,7 @@ cd Portable-Windows-Tray-Launcher
 .\build.ps1 -Toolchain 'C:\msys64\mingw64\bin'
 ```
 
-The build script generates `app.ico` and `tray.ico` from the versioned PNG files and creates all build and output directories. The C++ runtime is linked statically. Output: `dist\PortableTrayLauncher`. The executable is named `PortableTrayLauncher.exe`. Only the EXE and `Menu` folder are needed to run the application.
+The build script generates the icons and compiles the application. The `dist` directory contains the unpacked `PortableTrayLauncher` folder and one ZIP named `PortableTrayLauncher <version>.zip`, for example `PortableTrayLauncher 1.0.zip`. The ZIP contains the application files directly, without an enclosing folder. Extract it to a folder of your choice and run `PortableTrayLauncher.exe`, or run the EXE in the unpacked folder. The C++ runtime is linked statically. Intermediate build files and previous packages stay under `build`.
 
 Your personal `Menu` contents are not part of the source repository. The build creates an empty menu folder that you can fill with your own shortcuts and files. Back up those contents separately to restore a personal setup, and obtain installed or portable target applications separately.
 

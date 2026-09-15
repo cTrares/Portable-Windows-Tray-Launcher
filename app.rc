@@ -3,17 +3,18 @@
 2 ICON "tray.ico"
 1 RT_MANIFEST "app.manifest"
 1 VERSIONINFO
-FILEVERSION 1,0,1,0
-PRODUCTVERSION 1,0,1,0
+FILEVERSION 1,2,0,0
+PRODUCTVERSION 1,2,0,0
 FILETYPE VFT_APP
 BEGIN
   BLOCK "StringFileInfo"
   BEGIN
     BLOCK "040704b0"
     BEGIN
-      VALUE "FileDescription", "PortableTrayLauncher"
-      VALUE "ProductName", "PortableTrayLauncher"
-      VALUE "FileVersion", "1.0.1"
+      VALUE "FileDescription", "Portable Tray Launcher"
+      VALUE "ProductName", "Portable Tray Launcher"
+      VALUE "FileVersion", "1.2"
+      VALUE "ProductVersion", "1.2"
       VALUE "OriginalFilename", "PortableTrayLauncher.exe"
     END
   END

@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath (Split-Path $PSScriptRoot -Parent)
 $env:PATH = "$Toolchain;$env:PATH"
 $compiler = Join-Path $Toolchain 'g++.exe'
-$release = Join-Path (Get-Location) 'dist\PortableTrayLauncher\PortableTrayLauncher.exe'
+$release = Join-Path (Get-Location) 'build\PortableTrayLauncher.exe'
 $fixture = Join-Path (Get-Location) 'build\Test Menü'
 New-Item -ItemType Directory -Force -Path $fixture,"$fixture\01 Programme","$fixture\02 Dokumente\02 Unterordner","$fixture\03 Tools" | Out-Null
 & $compiler '-std=c++17' '-Os' '-municode' '-mwindows' '-static' '-s' 'tests\probe.cpp' '-o' "$fixture\01 Programme\01 Testprogramm.exe" '-lshell32'

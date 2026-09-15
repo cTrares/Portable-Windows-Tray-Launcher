@@ -22,11 +22,11 @@ Die gesamte ZIP in einen beschreibbaren Ordner entpacken und darin `PortableTray
 
 Echte Menüaufnahmen mit Beispieleinträgen. Die Ordner heißen auf der Festplatte `01 Applications`, `02 Documents` und `03 Tools`; angezeigt werden nur die Namen. Nummerierte Dateien stehen unterhalb der Ordner.
 
-`dist\PortableTrayLauncher\PortableTrayLauncher.exe` starten. Das Programm läuft ausschließlich im Infobereich der Taskleiste. Windows kann neue Tray-Icons zunächst unter dem Aufklapppfeil verbergen; das Icon lässt sich von dort in den sichtbaren Infobereich ziehen.
+`PortableTrayLauncher.exe` im Ordner `dist\PortableTrayLauncher` starten oder die ZIP `PortableTrayLauncher <Version>.zip` in einen eigenen Ordner entpacken und dort starten. Das Programm läuft ausschließlich im Infobereich der Taskleiste. Windows kann neue Tray-Icons zunächst unter dem Aufklapppfeil verbergen; das Icon lässt sich von dort in den sichtbaren Infobereich ziehen.
 
 - Linksklick: Menü unmittelbar oberhalb des Tray-Icons öffnen.
 - Rechtsklick: Menüordner öffnen, Autostart aktivieren/deaktivieren, Beenden.
-- Konfiguration: Dateien, Verknüpfungen und Ordner in `Menu` neben der EXE ablegen. Beim nächsten Linksklick wird alles frisch eingelesen.
+- Konfiguration: Dateien, Verknüpfungen und Ordner in `Menu` neben der EXE ablegen. Beim nächsten Linksklick wird alles frisch eingelesen. Es gibt keinen separaten Menüeditor: Eintrag in den Ordner legen, fertig.
 - Kein Hauptfenster, kein Einstellungsfenster, kein Menüeditor, keine permanente Ordnerüberwachung.
 
 Der gesamte Release-Ordner kann kopiert oder verschoben werden. Verknüpfungen und deren Ziele müssen am neuen Ort weiterhin gültig sein. Bei aktiviertem Autostart nach einem Umzug am neuen Ort erneut „Autostart aktivieren“ wählen: Windows benötigt dort einen absoluten EXE-Pfad. Autostart wird pro Benutzer unter `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` gespeichert; Administratorrechte sind nicht nötig. Es wird nicht automatisch Autostart aktiviert.
@@ -37,7 +37,7 @@ Die erste Ordnerstufe wird als Untermenü angezeigt. Darin enthaltene weitere Or
 
 Ordner stehen immer oberhalb von Dateien und Verknüpfungen. Innerhalb jeder Gruppe dienen führende Ziffern mit optionalen Leerzeichen, Bindestrichen oder Unterstrichen als Sortiernummer, z. B. `01 Programme`, `02-Excel.lnk`, `03_Handbuch.pdf`. Nummerierte Einträge erscheinen zuerst, numerisch sortiert; anschließend folgen unnummerierte Einträge alphabetisch. Dateiendungen werden ausgeblendet; reine Zahlennamen bleiben lesbar.
 
-Alle Einträge starten über die registrierte Standardaktion der Windows-Shell. Deshalb wird beispielsweise eine PS1-Datei nur ausgeführt, wenn Windows dies auch beim Doppelklick tun würde. Verknüpfungen behalten Argumente und Arbeitsverzeichnis. Fehlgeschlagene Starts zeigen eine kleine native Fehlermeldung.
+Der Launcher kann alles öffnen, was Windows auch per normalem Doppelklick öffnen kann: Programme, Verknüpfungen, Dokumente, Ordner, URLs, Skripte und andere registrierte Dateitypen. Jeder Eintrag wird an die Windows-Shell übergeben und verhält sich deshalb wie im Explorer. Eine PS1-Datei wird beispielsweise nur ausgeführt, wenn Windows sie auch beim Doppelklick ausführen würde. Verknüpfungen behalten Argumente und Arbeitsverzeichnis. Fehlgeschlagene Starts zeigen eine kleine native Fehlermeldung.
 
 Ein leerer Ordner bietet „Menü ist leer“ und „Menüordner öffnen“. Tastatur: Pfeiltasten, Enter, Escape und Anfangsbuchstaben. Große Menüs verwenden die native Windows-Menünavigation.
 
@@ -67,7 +67,7 @@ cd Portable-Windows-Tray-Launcher
 .\build.ps1 -Toolchain 'C:\msys64\mingw64\bin'
 ```
 
-Das Build-Skript erzeugt `app.ico` und `tray.ico` aus den versionierten PNG-Dateien sowie alle Build- und Ausgabeordner. Die C++-Runtime wird statisch eingebunden. Ausgabe: `dist\PortableTrayLauncher`. Der technische EXE-Name lautet `PortableTrayLauncher.exe`. Für den Betrieb werden nur EXE und `Menu` benötigt.
+Das Build-Skript erzeugt die Icons und kompiliert die Anwendung. In `dist` liegen der entpackte Ordner `PortableTrayLauncher` und genau eine ZIP namens `PortableTrayLauncher <Version>.zip`, beispielsweise `PortableTrayLauncher 1.0.zip`. Die ZIP enthält die Programmdateien direkt, ohne äußeren Ordner. In einen eigenen Ordner entpacken und `PortableTrayLauncher.exe` starten oder die EXE im bereits entpackten Programmordner verwenden. Die C++-Runtime wird statisch eingebunden. Build-Zwischendateien und ältere Pakete bleiben unter `build`.
 
 Der persönliche `Menu`-Inhalt gehört nicht zum Quellstand. Er wird beim Build leer angelegt und kann anschließend mit eigenen Verknüpfungen und Dateien befüllt werden. Für die Wiederherstellung einer persönlichen Einrichtung muss dieser Inhalt separat gesichert werden; installierte oder portable Zielprogramme werden separat bereitgestellt.
 

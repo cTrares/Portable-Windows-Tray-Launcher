@@ -319,8 +319,20 @@ void Draw(DRAWITEMSTRUCT* draw) {
     text.right -= Scale(25);
     DrawTextW(dc, item->label.c_str(), -1, &text,
         DT_SINGLELINE | DT_VCENTER | DT_NOPREFIX | DT_END_ELLIPSIS);
-    // Windows draws the submenu arrow, including for owner-drawn menu items.
+    if (item->submenu) {
+        HPEN pen = CreatePen(PS_SOLID, std::max(1, Scale(1)), Foreground);
+        HGDIOBJ old = SelectObject(dc, pen);
+        int x = row.right - Scale(13);
+        MoveToEx(dc, x - Scale(2), centerY - Scale(3), nullptr);
+        LineTo(dc, x + Scale(1), centerY);
+        LineTo(dc, x - Scale(2), centerY + Scale(3));
+        SelectObject(dc, old);
+        DeleteObject(pen);
+    }
     RestoreDC(dc, saved);
+    // USER32 adds its triangle after WM_DRAWITEM, even for owner-drawn items.
+    // Keep this row out of that final draw so only our light chevron remains.
+    if (item->submenu) ExcludeClipRect(dc, row.left, row.top, row.right, row.bottom);
 }
 
 void ShowMenu(bool administration, POINT point) {
